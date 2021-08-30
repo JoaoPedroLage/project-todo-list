@@ -1,6 +1,5 @@
 const creatTask = document.getElementById('criar-tarefa');
 const list = document.getElementById('lista-tarefas');
-const listClass = document.querySelector('.taskList');
 const allLi = document.getElementsByTagName('li');
 const eraseList = document.getElementById('apaga-tudo');
 const eraseSelected = document.getElementById('remover-finalizados');
@@ -18,14 +17,12 @@ function removeAllItens() {
   list.innerHTML = '';
 }
 
-// allLi.classList.add = 'li-list-item';
-// const liListItem = document.querySelectorAll('.li-lis-item');
 function removeSelected() {
   for (let i = 0; i < allLi.length; i += 1) {
     const element = allLi[i];
 
     if (element.classList.contains('completed')) {
-      listClass.removeChild(element);
+      list.removeChild(element);
       i -= 1;
     }
   }
