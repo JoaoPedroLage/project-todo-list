@@ -1,8 +1,6 @@
-const creatTask = document.getElementById('criar-tarefa');
 const list = document.getElementById('lista-tarefas');
+const creatTask = document.getElementById('criar-tarefa');
 const allLi = document.getElementsByTagName('li');
-const eraseList = document.getElementById('apaga-tudo');
-const eraseSelected = document.getElementById('remover-finalizados');
 
 function addItem() {
   const input = document.getElementById('texto-tarefa').value;
@@ -10,6 +8,7 @@ function addItem() {
   addToList = `${addToList}<li>${input}</li>`;
 
   document.getElementById('lista-tarefas').innerHTML = addToList;
+  // localStorage.setItem()
   document.getElementById('texto-tarefa').value = '';
 }
 
@@ -17,7 +16,7 @@ function removeAllItens() {
   list.innerHTML = '';
 }
 
-function removeSelected() {
+function removeSelecteds() {
   for (let i = 0; i < allLi.length; i += 1) {
     const element = allLi[i];
 
@@ -43,8 +42,19 @@ function riskTask(event) {
   } else event.target.classList.add('completed');
 }
 
+const eraseList = document.getElementById('apaga-tudo');
+const eraseSelecteds = document.getElementById('remover-finalizados');
+const eraseSelected = document.getElementById('remover-selecionado');
+
 creatTask.addEventListener('click', addItem);
 list.addEventListener('click', clickChange);
 list.addEventListener('dblclick', riskTask);
 eraseList.addEventListener('click', removeAllItens);
-eraseSelected.addEventListener('click', removeSelected);
+eraseSelecteds.addEventListener('click', removeSelecteds);
+eraseSelected.addEventListener('click', () => {
+  for (let i = 0; i < allLi.length; i += 1) {
+    if (allLi[i].classList.contains('greySelected')) {
+      list.removeChild(allLi[i]);
+    }
+  }
+});
